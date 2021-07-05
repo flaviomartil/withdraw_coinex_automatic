@@ -17,7 +17,7 @@ function send_request($url, $params, $sign){
         'authorization:'.$sign,
         'Content-type: application/json'
     ];
-
+    $paramsBeforeEncode = $params;
     $params=json_encode($params);
 
     $ch = curl_init($url);
@@ -26,7 +26,13 @@ function send_request($url, $params, $sign){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
     curl_setopt($ch,CURLOPT_HTTPHEADER, $headers);
     $output=curl_exec($ch);
-    echo  $output;
+    $decoded = json_decode($output);
+    $message = (string) $decoded->message;
+    $itemAtual =  $paramsBeforeEncode['coin_address']  . " " .  $paramsBeforeEncode['actual_amount'] . " " . $message;
+    echo $itemAtual . "<br>";
+    $logsUse=fopen("logs.txt","a");
+    fwrite($logsUse,$itemAtual . "\n");
+
 }
 $tonce = round(microtime(true) * 1000);
 $url = "https://api.coinex.com/v1/balance/coin/withdraw";
