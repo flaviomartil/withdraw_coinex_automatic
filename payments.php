@@ -36,8 +36,8 @@ function send_request($url, $params, $sign){
 }
 $tonce = round(microtime(true) * 1000);
 $url = "https://api.coinex.com/v1/balance/coin/withdraw";
-$access_id = "9BCF2B39AD5C40B2A2F8DE4E85A0A4F4"; //access_id
-$secret_key = "B50395945B5867226E8AE526A70BA2E42FE710808149D5A7"; //secret_key
+$access_id = "YOUR_ACESSID"; //access_id
+$secret_key = "YOURSECRETKEY"; //secret_key
 
 $file = "test.txt";
 $contents = file_get_contents($file);
